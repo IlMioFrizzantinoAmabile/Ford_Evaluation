@@ -1,9 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%% PARAMETRI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 num_iterazioni=1000000;
-anni_previsti = 10;
-anni_decad = 10;
-periodo = 2;
-importanza_ultimi_anni = 1.2;
+anni_previsti = 10;   %numero di anni per cui si ipotizza il Grow Rate utlizzando una gassiana
+anni_decad = 10; %numero di anni in cui si riporta linearmente il Grow Rate sotto la soglia accettabile (WACC) per il valore terminale
+periodo = 2; %numero di anni in cui si ammortizza il Grow Rate (dovrebbe essere divisore di 36, a meno di aggiustare i resti)
+importanza_ultimi_anni = 1.2; %nel calcolare media e var della gaussiana si da peso maggiore agli ultimi anni, ogni anno conta x1.2 volte il precedente.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -76,7 +76,7 @@ for i = 1 : (36/periodo)
 end
 %figure; plot(grow_rate); set(gca,'Xticklabel',[]); legend('Grow Rate 2-years'); saveas(gcf,'Grow_Rate_2.png')
 
-%%%%%% assegna peso maggiore agli anni più prossimi %%%%%%%
+%%%%%% assegna peso maggiore agli anni piÃ¹ prossimi %%%%%%%
 counter=1; grow_rate_pesato=[];
 for i = 1: (36/periodo - 1)
     for x=1:(round(importanza_ultimi_anni^i)+1)
